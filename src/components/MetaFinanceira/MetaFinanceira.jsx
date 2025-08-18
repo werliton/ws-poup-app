@@ -3,6 +3,8 @@ import { Cartao, CartaoCabecalho, Descricao } from "@components/Cartao";
 import { CartaoCorpo } from "@components/Cartao";
 import { PigIcon } from "@components/Icones";
 import BarraProgresso from "@components/MetaFinanceira/BarraProgresso/BarraProgresso";
+import { useRecoilValue } from "recoil";
+import { financeSelector } from "src/service/selectors/financeSelector";
 
 export const TituloMetaFinanceira = styled.p`
   display: flex;
@@ -15,6 +17,7 @@ export const TituloMetaFinanceira = styled.p`
 `;
 
 const MetaFinanceira = () => {
+  const { objetivo } = useRecoilValue(financeSelector);
   return (
     <Cartao>
       <CartaoCabecalho>Progresso da meta financeira</CartaoCabecalho>
@@ -22,7 +25,7 @@ const MetaFinanceira = () => {
         <Descricao>
           <TituloMetaFinanceira>
             <PigIcon />
-            Economizar
+            {objetivo}
           </TituloMetaFinanceira>
           <BarraProgresso />
         </Descricao>

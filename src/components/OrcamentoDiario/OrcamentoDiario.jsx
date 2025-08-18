@@ -3,10 +3,10 @@ import CartaoCabecalho from "../Cartao/CartaoCabecalho/CartaoCabecalho";
 import CartaoCorpo from "../Cartao/CartaoCorpo/CartaoCorpo";
 import { Descricao } from "../Cartao";
 import { useRecoilValue } from "recoil";
-import financeState from "src/service/atoms/financeState";
+import { financeSelector } from "src/service/selectors/financeSelector";
 
 const OrcamentoDiario = () => {
-  const { renda: orcamentoDiario } = useRecoilValue(financeState);
+  const { orcamento: orcamentoDiario } = useRecoilValue(financeSelector);
 
   return (
     <Cartao>

@@ -38,7 +38,7 @@ const Cadastro = () => {
 
     setFinance({
       nome,
-      renda: renda,
+      renda,
       objetivo: objetivoFinanceiro,
     });
 

@@ -1,4 +1,6 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
+import { financeProgressSelector } from "src/service/selectors/financeProgressSelector";
 import styled from "styled-components";
 
 export const BarraContainer = styled.div`
@@ -32,7 +34,7 @@ export const TextoProgresso = styled.div`
 `;
 
 const BarraProgresso = () => {
-  const progressoMeta = 50;
+  const { progress: progressoMeta } = useRecoilValue(financeProgressSelector);
 
   return (
     <BarraContainer>
