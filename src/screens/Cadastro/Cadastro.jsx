@@ -15,6 +15,8 @@ import { RadioGroup, RadioInput } from "@components/BotaoRadio";
 import Form from "@components/Form/Form";
 import ilustracao from "@assets/images/ilustracao-cadastro.png";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import financeState from "src/service/atoms/financeState.js";
 
 const Cadastro = () => {
   const navigate = useNavigate();
@@ -23,8 +25,23 @@ const Cadastro = () => {
   const [renda, setRenda] = useState("");
   const [objetivoFinanceiro, setObjetivoFinanceiro] = useState("");
 
+  const [_, setFinance] = useRecoilState(financeState);
+
   const aoSubmeterFormulario = (evento) => {
     evento.preventDefault();
+    const inputs = [nome, renda, objetivoFinanceiro];
+
+    if (inputs.some((item) => item.length == 0)) {
+      alert("Preencha todos os campos");
+      return;
+    }
+
+    setFinance({
+      nome,
+      renda: renda,
+      objetivo: objetivoFinanceiro,
+    });
+
     navigate("/home");
   };
 
