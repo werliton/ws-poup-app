@@ -4,4 +4,7 @@ const currencyFormatter = new Intl.NumberFormat("pt-BR", {
   minimumFractionDigits: 2,
 });
 
-export { currencyFormatter };
+const dateFormatter = (date) =>
+  new Intl.DateTimeFormat("pt-BR").format(new Date(date));
+
+export { currencyFormatter, dateFormatter };

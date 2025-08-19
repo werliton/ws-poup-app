@@ -19,12 +19,12 @@ const financeProgressSelector = selector({
   get: ({ get }) => {
     const { objetivo, renda } = get(financeState);
     const orcamento = renda / 30;
+    const meta = getFinanceRule(objetivo, renda);
 
-    return {
-      progress: ((orcamento / getFinanceRule(objetivo, renda)) * 100).toFixed(
-        2
-      ),
-    };
+    if (objetivo == "controlar-gastos")
+      return (((meta - orcamento) / meta) * 100).toFixed(2);
+
+    return ((orcamento / meta) * 100).toFixed(2);
   },
 });
 

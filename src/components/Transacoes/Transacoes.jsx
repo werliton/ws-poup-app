@@ -5,8 +5,11 @@ import Transacao from "./Transacao/Transacao";
 import { Cartao, CartaoCabecalho } from "@components/Cartao";
 import Botao from "@components/Botao";
 import TransacaoModal from "./TransacaoModal";
+import { selectTransactions } from "src/service/selectors/transactionSelector";
+import { useRecoilValue } from "recoil";
 
-const Transacoes = ({ transacoes }) => {
+const Transacoes = () => {
+  const transacoes = useRecoilValue(selectTransactions);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -22,6 +25,7 @@ const Transacoes = ({ transacoes }) => {
       <CartaoCabecalho>Movimentação financeira</CartaoCabecalho>
       <Container>
         <ListaMovimentacoes>
+          {transacoes.length == 0 && <div>Nenhuma transação por aqui.</div>}
           {transacoes.map((transacao) => (
             <Transacao key={transacao.id} transacao={transacao} />
           ))}

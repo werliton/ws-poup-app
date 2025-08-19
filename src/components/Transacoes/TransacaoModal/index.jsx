@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import CampoTexto from "@components/CampoTexto";
 import Fieldset from "@components/Fieldset";
 import Form from "@components/Form";
@@ -6,6 +6,8 @@ import { MoneyIcon } from "@components/Icones";
 import Label from "@components/Label";
 import Modal from "@components/Modal";
 import { SelectGroup, SelectOption } from "@components/Select";
+import { useRecoilState } from "recoil";
+import { transactionState } from "src/service/atoms/transactionState";
 
 const TransacaoModal = ({ isOpen, onCloseModal }) => {
   const [novaTransacao, setNovaTransacao] = useState({
@@ -15,8 +17,17 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
     categoria: "",
     data: "",
   });
+  const [_, setTransaction] = useRecoilState(transactionState);
+  const id = useId();
 
   const aoSubmeterFormModal = () => {
+    setTransaction((prev) => [
+      ...prev,
+      {
+        ...novaTransacao,
+        id,
+      },
+    ]);
     onCloseModal();
   };
 

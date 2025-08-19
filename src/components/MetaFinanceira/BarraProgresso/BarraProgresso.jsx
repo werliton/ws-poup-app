@@ -34,7 +34,7 @@ export const TextoProgresso = styled.div`
 `;
 
 const BarraProgresso = () => {
-  const { progress: progressoMeta } = useRecoilValue(financeProgressSelector);
+  const progressoMeta = useRecoilValue(financeProgressSelector);
 
   return (
     <BarraContainer>
