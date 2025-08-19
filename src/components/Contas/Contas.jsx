@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Conta from "./Conta/Conta";
 import styled from "styled-components";
 import CampoTexto from "@components/CampoTexto";
@@ -10,6 +9,7 @@ import Label from "@components/Label";
 import Fieldset from "@components/Fieldset";
 import { WalletIcon } from "@components/Icones";
 import CartaoCorpo from "@components/Cartao/CartaoCorpo/CartaoCorpo";
+import useAccount from "src/hooks/useAccount";
 
 export const Container = styled(CartaoCorpo)`
   padding: var(--padding-l) var(--padding-m);
@@ -36,30 +36,23 @@ export const ListaMovimentacoes = styled.ul`
   -ms-overflow-style: none;
 `;
 
-const Contas = ({contas}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [novaConta, setNovaConta] = useState({
-    banco: "",
-    saldo: 0,
-  });
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const aoAdicionarConta = () => {
-    handleCloseModal();
-  };
+const Contas = () => {
+  const {
+    aoAdicionarConta,
+    handleOpenModal,
+    handleCloseModal,
+    setNovaConta,
+    isModalOpen,
+    novaConta,
+    contas,
+  } = useAccount();
 
   return (
     <Cartao>
       <CartaoCabecalho>Minhas contas</CartaoCabecalho>
       <Container>
         <ListaMovimentacoes>
+          {contas.length == 0 && <div>Nenhuma conta cadastrada.</div>}
           {contas.map((conta) => (
             <Conta key={conta.id} conta={conta} />
           ))}

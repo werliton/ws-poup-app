@@ -28,7 +28,7 @@ function Home() {
       </Orcamento>
       <Movimentacoes>
         <Transacoes />
-        <Contas contas={contas} />
+        <Contas />
       </Movimentacoes>
       <BalancoFinanceiro />
     </Container>
