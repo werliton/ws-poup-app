@@ -10,7 +10,7 @@ export const financeSelector = selector({
     return {
       ...finance,
       renda: currencyFormatter.format(parseFloat(finance.renda)),
-      orcamento: currencyFormatter.format(Math.floor(finance.renda / 30)),
+      orcamento: currencyFormatter.format(Math.floor(finance.orcamento)),
     };
   },
 });

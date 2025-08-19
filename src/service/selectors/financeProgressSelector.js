@@ -17,8 +17,7 @@ const getFinanceRule = (meta, valor) => {
 const financeProgressSelector = selector({
   key: "financeProgressSelector",
   get: ({ get }) => {
-    const { objetivo, renda } = get(financeState);
-    const orcamento = renda / 30;
+    const { objetivo, orcamento, renda } = get(financeState);
     const meta = getFinanceRule(objetivo, renda);
 
     if (objetivo == "controlar-gastos")

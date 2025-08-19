@@ -8,6 +8,7 @@ import Modal from "@components/Modal";
 import { SelectGroup, SelectOption } from "@components/Select";
 import { useRecoilState } from "recoil";
 import { transactionState } from "src/service/atoms/transactionState";
+import financeState from "src/service/atoms/financeState";
 
 const TransacaoModal = ({ isOpen, onCloseModal }) => {
   const [novaTransacao, setNovaTransacao] = useState({
@@ -17,7 +18,8 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
     categoria: "",
     data: "",
   });
-  const [_, setTransaction] = useRecoilState(transactionState);
+  const [, setTransaction] = useRecoilState(transactionState);
+  const [, setFinance] = useRecoilState(financeState);
   const id = useId();
 
   const aoSubmeterFormModal = () => {
@@ -28,6 +30,14 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
         id,
       },
     ]);
+
+    setFinance((prevFinance) => ({
+      ...prevFinance,
+      orcamento:
+        novaTransacao.tipo == "receita"
+          ? Number(prevFinance.orcamento + parseFloat(novaTransacao.valor))
+          : Number(prevFinance.orcamento - parseFloat(novaTransacao.valor)),
+    }));
     onCloseModal();
   };
 
