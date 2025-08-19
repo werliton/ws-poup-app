@@ -2,6 +2,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { accountsAtom } from "src/service/atoms/accountsAtom";
 import { getAccountState } from "src/service/selectors/accountSelector";
 import { useId, useState } from "react";
+import useBudget from "src/hooks/useBudget";
 
 function useAccount() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,6 +13,7 @@ function useAccount() {
   const id = useId();
   const [, setAccount] = useRecoilState(accountsAtom);
   const savedAccounts = useRecoilValue(getAccountState);
+  const { addIncome } = useBudget();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -25,6 +27,7 @@ function useAccount() {
     handleCloseModal();
 
     setAccount((prev) => [...prev, { id, ...novaConta }]);
+    addIncome(novaConta.saldo);
   };
 
   return {

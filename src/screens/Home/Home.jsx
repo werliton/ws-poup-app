@@ -7,14 +7,6 @@ import Transacoes from "@components/Transacoes/Transacoes";
 import Contas from "@components/Contas/Contas";
 import BalancoFinanceiro from "@components/BalancoFinanceiro";
 import { Container, Movimentacoes, Orcamento } from "./style";
-import { useRecoilValue } from "recoil";
-import { selectTransactions } from "src/service/selectors/transactionSelector";
-
-const contas = [
-  { id: 1, banco: "Anybank", saldo: 1500 },
-  { id: 2, banco: "Bytebank", saldo: 2500 },
-  { id: 3, banco: "Swiftbank", saldo: 3200 },
-];
 
 function Home() {
   return (

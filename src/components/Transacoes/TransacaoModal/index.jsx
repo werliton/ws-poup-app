@@ -8,7 +8,7 @@ import Modal from "@components/Modal";
 import { SelectGroup, SelectOption } from "@components/Select";
 import { useRecoilState } from "recoil";
 import { transactionsAtom } from "src/service/atoms/transactionsAtom";
-import financeAtom from "src/service/atoms/financeAtom";
+import useBudget from "src/hooks/useBudget";
 
 const TransacaoModal = ({ isOpen, onCloseModal }) => {
   const [novaTransacao, setNovaTransacao] = useState({
@@ -19,8 +19,13 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
     data: "",
   });
   const [, setTransaction] = useRecoilState(transactionsAtom);
-  const [, setFinance] = useRecoilState(financeAtom);
+  const { addIncome, addOutcome } = useBudget();
   const id = useId();
+
+  // const transaction = {
+  //   receita: addIncome,
+  //   despesa: addOutcome,
+  // };
 
   const aoSubmeterFormModal = () => {
     setTransaction((prev) => [
@@ -31,13 +36,14 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
       },
     ]);
 
-    setFinance((prevFinance) => ({
-      ...prevFinance,
-      orcamento:
-        novaTransacao.tipo == "receita"
-          ? Number(prevFinance.orcamento + parseFloat(novaTransacao.valor))
-          : Number(prevFinance.orcamento - parseFloat(novaTransacao.valor)),
-    }));
+    if (novaTransacao.tipo == "receita") {
+      addIncome(novaTransacao.valor);
+    } else if (novaTransacao.tipo == "despesa") {
+      addOutcome(novaTransacao.valor);
+    }
+
+    // transaction[novaTransacao.tipo](novaTransacao.valor);
+
     onCloseModal();
   };
 
