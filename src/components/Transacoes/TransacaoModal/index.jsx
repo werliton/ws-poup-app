@@ -22,10 +22,10 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
   const { addIncome, addOutcome } = useBudget();
   const id = useId();
 
-  // const transaction = {
-  //   receita: addIncome,
-  //   despesa: addOutcome,
-  // };
+  const transaction = {
+    receita: addIncome,
+    despesa: addOutcome,
+  };
 
   const aoSubmeterFormModal = () => {
     setTransaction((prev) => [
@@ -36,13 +36,7 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
       },
     ]);
 
-    if (novaTransacao.tipo == "receita") {
-      addIncome(novaTransacao.valor);
-    } else if (novaTransacao.tipo == "despesa") {
-      addOutcome(novaTransacao.valor);
-    }
-
-    // transaction[novaTransacao.tipo](novaTransacao.valor);
+    transaction[novaTransacao.tipo](novaTransacao.valor);
 
     onCloseModal();
   };
