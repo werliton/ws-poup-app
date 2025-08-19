@@ -7,8 +7,8 @@ import Label from "@components/Label";
 import Modal from "@components/Modal";
 import { SelectGroup, SelectOption } from "@components/Select";
 import { useRecoilState } from "recoil";
-import { transactionState } from "src/service/atoms/transactionState";
-import financeState from "src/service/atoms/financeState";
+import { transactionsAtom } from "src/service/atoms/transactionsAtom";
+import financeAtom from "src/service/atoms/financeAtom";
 
 const TransacaoModal = ({ isOpen, onCloseModal }) => {
   const [novaTransacao, setNovaTransacao] = useState({
@@ -18,8 +18,8 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
     categoria: "",
     data: "",
   });
-  const [, setTransaction] = useRecoilState(transactionState);
-  const [, setFinance] = useRecoilState(financeState);
+  const [, setTransaction] = useRecoilState(transactionsAtom);
+  const [, setFinance] = useRecoilState(financeAtom);
   const id = useId();
 
   const aoSubmeterFormModal = () => {

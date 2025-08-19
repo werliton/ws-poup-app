@@ -16,7 +16,7 @@ import Form from "@components/Form/Form";
 import ilustracao from "@assets/images/ilustracao-cadastro.png";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import financeState from "src/service/atoms/financeState.js";
+import financeAtom from "src/service/atoms/financeAtom.js";
 
 const Cadastro = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Cadastro = () => {
   const [renda, setRenda] = useState("");
   const [objetivoFinanceiro, setObjetivoFinanceiro] = useState("");
 
-  const [_, setFinance] = useRecoilState(financeState);
+  const [_, setFinance] = useRecoilState(financeAtom);
 
   const aoSubmeterFormulario = (evento) => {
     evento.preventDefault();

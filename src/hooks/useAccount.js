@@ -1,5 +1,5 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-import { accountAtom } from "src/service/atoms/accountAtom";
+import { accountsAtom } from "src/service/atoms/accountsAtom";
 import { getAccountState } from "src/service/selectors/accountSelector";
 import { useId, useState } from "react";
 
@@ -10,7 +10,7 @@ function useAccount() {
     saldo: 0,
   });
   const id = useId();
-  const [, setAccount] = useRecoilState(accountAtom);
+  const [, setAccount] = useRecoilState(accountsAtom);
   const savedAccounts = useRecoilValue(getAccountState);
 
   const handleOpenModal = () => {

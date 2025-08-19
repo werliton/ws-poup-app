@@ -2,7 +2,7 @@
 
 # 💰 PoupApp
 
-O PoupApp é uma plataforma de gerenciamento financeiro voltada para ajudar usuários a organizar suas finanças. Focado na simplicidade, o PoupApp permite que os usuários acompanhem seus gastos, definam metas financeiras e visualizem seu progresso através de gráficos dinâmicos. 
+O PoupApp é uma plataforma de gerenciamento financeiro voltada para ajudar usuários a organizar suas finanças. Focado na simplicidade, o PoupApp permite que os usuários acompanhem seus gastos, definam metas financeiras e visualizem seu progresso através de gráficos dinâmicos.
 
 Com funcionalidades que incentivam o controle de despesas e a organização do orçamento diário, o PoupApp se torna o parceiro ideal para quem busca saúde financeira e realização de objetivos pessoais.
 
@@ -34,25 +34,64 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 E outras dependências e ferramentas auxiliares.
 
+## Estrutura do projeto
+
+```
+src/
+│
+├── atoms/
+│   ├── financeAtom.js
+│   ├── accountsAtom.js
+│   ├── transactionsAtom.js
+│
+├── selectors/
+│   ├── accountSelectors.js
+│   ├── transactionsSelectors.js
+│   └── budgetSelectors.js
+│
+├── hooks/
+│   ├── useUser.js
+│   ├── useAccount.js
+│   ├── useTransactions.js
+│   └── useBudget.js
+│
+├── components/
+│   ├── User/
+│   │   ├── UserProfile.js
+│   │   └── UserSettings.js
+│   │
+│   ├── Account/
+│   │   ├── AccountDetails.js
+│   │   └── AccountSettings.js
+│   │
+│   ├── Transactions/
+│   │   ├── TransactionsList.js
+│   │   └── TransactionDetails.js
+│
+└── utils/
+    └── formatters.js
+
+```
+
 ## 🛠️ Abrir e rodar o projeto
 
 Para rodar o projeto em sua máquina local, siga estes passos:
 
 1. Baixe o repositório do projeto para o seu computador.
 
-2. Navegue até a pasta do projeto, extraia os arquivos e abra no seu editor de código favorito. 
+2. Navegue até a pasta do projeto, extraia os arquivos e abra no seu editor de código favorito.
 
 3. Instale as dependências executando:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 4. Para iniciar o servidor de desenvolvimento, utilize o comando:
 
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
 5. O projeto estará disponível em http://localhost:5173.
 
@@ -60,6 +99,6 @@ Para rodar o projeto em sua máquina local, siga estes passos:
 
 Gostou do projeto e quer conhecer mais?
 
-O design e protótipo deste projeto podem ser encontrados [aqui](https://www.figma.com/community/file/1425141851641585452). Este projeto é fictício e sem fins lucrativos. 
+O design e protótipo deste projeto podem ser encontrados [aqui](https://www.figma.com/community/file/1425141851641585452). Este projeto é fictício e sem fins lucrativos.
 
 Aproveite o desenvolvimento e aprimoramento do PoupApp!

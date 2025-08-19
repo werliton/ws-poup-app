@@ -1,11 +1,11 @@
 import { selector } from "recoil";
-import financeState from "../atoms/financeState";
+import financeAtom from "../atoms/financeAtom";
 import { currencyFormatter } from "src/utils/formatter";
 
 export const financeSelector = selector({
   key: "financeSelector",
   get: ({ get }) => {
-    const finance = get(financeState);
+    const finance = get(financeAtom);
 
     return {
       ...finance,

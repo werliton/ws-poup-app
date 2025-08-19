@@ -1,5 +1,5 @@
 import { selector } from "recoil";
-import financeState from "../atoms/financeState";
+import financeAtom from "../atoms/financeAtom";
 
 const getFinanceRule = (meta, valor) => {
   switch (meta) {
@@ -17,7 +17,7 @@ const getFinanceRule = (meta, valor) => {
 const financeProgressSelector = selector({
   key: "financeProgressSelector",
   get: ({ get }) => {
-    const { objetivo, orcamento, renda } = get(financeState);
+    const { objetivo, orcamento, renda } = get(financeAtom);
     const meta = getFinanceRule(objetivo, renda);
 
     if (objetivo == "controlar-gastos")

@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import financeState from "src/service/atoms/financeState";
+import financeAtom from "src/service/atoms/financeAtom";
 import styled from "styled-components";
 
 export const Usuario = styled.div`
@@ -16,7 +16,7 @@ export const Usuario = styled.div`
 `;
 
 const SaudacaoUsuario = () => {
-  const { nome: username } = useRecoilValue(financeState);
+  const { nome: username } = useRecoilValue(financeAtom);
 
   return (
     <Usuario>

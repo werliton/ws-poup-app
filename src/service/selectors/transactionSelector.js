@@ -1,11 +1,11 @@
 import { selector } from "recoil";
-import { transactionState } from "../atoms/transactionState";
+import { transactionsAtom } from "../atoms/transactionsAtom";
 import { currencyFormatter, dateFormatter } from "src/utils/formatter";
 
 export const selectTransactions = selector({
   key: "selectTransactions",
   get: ({ get }) => {
-    const transactions = get(transactionState);
+    const transactions = get(transactionsAtom);
 
     if (!transactions.length) return transactions;
 

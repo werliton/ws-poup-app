@@ -1,11 +1,11 @@
 import { selector } from "recoil";
-import { accountAtom } from "../atoms/accountAtom";
+import { accountsAtom } from "../atoms/accountsAtom";
 import { currencyFormatter } from "src/utils/formatter";
 
 export const getAccountState = selector({
   key: "getAccountState",
   get: ({ get }) => {
-    const accounts = get(accountAtom);
+    const accounts = get(accountsAtom);
 
     return accounts.map((item) => ({
       ...item,
