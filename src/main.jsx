@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./screens/Home/Home.jsx";
 import Cadastro from "./screens/Cadastro/Cadastro.jsx";
 import GlobalStyle from "./GlobalStyle/index.jsx";
-import { RecoilRoot } from "recoil";
+import { StoreProvider } from "./mobx/StoreContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,9 +19,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RecoilRoot>
+    <StoreProvider>
       <GlobalStyle />
       <RouterProvider router={router} />
-    </RecoilRoot>
+    </StoreProvider>
   </StrictMode>
 );

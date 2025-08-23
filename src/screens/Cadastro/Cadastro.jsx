@@ -15,17 +15,17 @@ import { RadioGroup, RadioInput } from "@components/BotaoRadio";
 import Form from "@components/Form/Form";
 import ilustracao from "@assets/images/ilustracao-cadastro.png";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import financeAtom from "src/service/atoms/financeAtom.js";
+import { useStore } from "src/mobx/StoreContext.jsx";
+import { observer } from "mobx-react";
 
-const Cadastro = () => {
+const Cadastro = observer(() => {
   const navigate = useNavigate();
 
   const [nome, setNome] = useState("");
   const [renda, setRenda] = useState("");
   const [objetivoFinanceiro, setObjetivoFinanceiro] = useState("");
 
-  const [_, setFinance] = useRecoilState(financeAtom);
+  const { userStore } = useStore();
 
   const aoSubmeterFormulario = (evento) => {
     evento.preventDefault();
@@ -36,11 +36,11 @@ const Cadastro = () => {
       return;
     }
 
-    setFinance({
+    userStore.defineDadosUsuario({
       nome,
       renda,
-      objetivo: objetivoFinanceiro,
-      orcamento: renda / 30,
+      objetivoFinanceiro,
+      // orcamento: renda / 30,
     });
 
     navigate("/home");
@@ -125,6 +125,6 @@ const Cadastro = () => {
       </SectionWrapper>
     </Section>
   );
-};
+});
 
 export default Cadastro;
