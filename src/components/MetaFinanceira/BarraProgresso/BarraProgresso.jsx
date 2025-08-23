@@ -1,6 +1,5 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
-import { financeProgressSelector } from "src/service/selectors/financeProgressSelector";
+import { useStore } from "src/mobx/StoreContext";
 import styled from "styled-components";
 
 export const BarraContainer = styled.div`
@@ -34,7 +33,8 @@ export const TextoProgresso = styled.div`
 `;
 
 const BarraProgresso = () => {
-  const progressoMeta = useRecoilValue(financeProgressSelector);
+  const { userStore } = useStore();
+  const progressoMeta = userStore.calculaProgresso();
 
   return (
     <BarraContainer>

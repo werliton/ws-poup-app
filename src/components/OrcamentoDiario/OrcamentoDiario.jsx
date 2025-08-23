@@ -2,19 +2,19 @@ import Cartao from "../Cartao/Cartao";
 import CartaoCabecalho from "../Cartao/CartaoCabecalho/CartaoCabecalho";
 import CartaoCorpo from "../Cartao/CartaoCorpo/CartaoCorpo";
 import { Descricao } from "../Cartao";
-import { useRecoilValue } from "recoil";
-import { financeSelector } from "src/service/selectors/financeSelector";
+import { useStore } from "src/mobx/StoreContext";
+import { observer } from "mobx-react";
 
-const OrcamentoDiario = () => {
-  const { orcamento: orcamentoDiario } = useRecoilValue(financeSelector);
+const OrcamentoDiario = observer(() => {
+  const { userStore } = useStore();
 
   return (
     <Cartao>
       <CartaoCabecalho>Orçamento diário disponível</CartaoCabecalho>
       <CartaoCorpo>
-        <Descricao>{orcamentoDiario}</Descricao>
+        <Descricao>{userStore.getOrcamentoDiario()}</Descricao>
       </CartaoCorpo>
     </Cartao>
   );
-};
+});
 export default OrcamentoDiario;
