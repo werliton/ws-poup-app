@@ -1,5 +1,5 @@
-import { useRecoilValue } from "recoil";
-import financeAtom from "src/service/atoms/financeAtom";
+import { observer } from "mobx-react";
+import { useStore } from "src/mobx/StoreContext";
 import styled from "styled-components";
 
 export const Usuario = styled.div`
@@ -15,8 +15,10 @@ export const Usuario = styled.div`
   }
 `;
 
-const SaudacaoUsuario = () => {
-  const { nome: username } = useRecoilValue(financeAtom);
+const SaudacaoUsuario = observer(() => {
+  const {
+    userStore: { nome: username },
+  } = useStore();
 
   return (
     <Usuario>
@@ -24,6 +26,6 @@ const SaudacaoUsuario = () => {
       <p>Veja como estão suas finanças hoje.</p>
     </Usuario>
   );
-};
+});
 
 export default SaudacaoUsuario;

@@ -34,7 +34,7 @@ export const TextoProgresso = styled.div`
 
 const BarraProgresso = () => {
   const { userStore } = useStore();
-  const progressoMeta = userStore.calculaProgresso();
+  const progressoMeta = userStore.progressoCalculado;
 
   return (
     <BarraContainer>

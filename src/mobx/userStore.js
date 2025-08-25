@@ -35,7 +35,7 @@ class UserStore {
     return currencyFormatter.format(this.orcamentoDiario);
   }
 
-  calculaProgresso() {
+  get progressoCalculado() {
     const { objetivoFinanceiro, orcamentoDiario, renda } = this;
 
     const meta = getFinanceRule(objetivoFinanceiro, renda);
