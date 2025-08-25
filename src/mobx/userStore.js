@@ -13,6 +13,13 @@ const getFinanceRule = (meta, valor) => {
       return valor;
   }
 };
+
+const OBJETIVO_FINANCEIRO = {
+  economuizar: "Economizar",
+  investir: "Investir",
+  "controlar-gastos": "Controlar Gastos",
+};
+
 class UserStore {
   nome = "";
   renda = 0;
@@ -44,6 +51,10 @@ class UserStore {
       return (((meta - orcamentoDiario) / meta) * 100).toFixed(2);
 
     return ((orcamentoDiario / meta) * 100).toFixed(2);
+  }
+
+  get objetivoFinanceiroAtual() {
+    return OBJETIVO_FINANCEIRO[this.objetivoFinanceiro] || "";
   }
 }
 

@@ -25,7 +25,7 @@ const MetaFinanceira = observer(() => {
         <Descricao>
           <TituloMetaFinanceira>
             <PigIcon />
-            {userStore.objetivoFinanceiro}
+            {userStore.objetivoFinanceiroAtual}
           </TituloMetaFinanceira>
           <BarraProgresso />
         </Descricao>

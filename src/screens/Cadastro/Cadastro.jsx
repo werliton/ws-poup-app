@@ -40,7 +40,6 @@ const Cadastro = observer(() => {
       nome,
       renda,
       objetivoFinanceiro,
-      // orcamento: renda / 30,
     });
 
     navigate("/home");
