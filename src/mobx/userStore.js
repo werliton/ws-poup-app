@@ -1,6 +1,7 @@
-import { makeAutoObservable } from "mobx";
+import { autorun, makeAutoObservable } from "mobx";
 import { currencyFormatter } from "src/utils/formatter";
 
+const KEY_STORAGE = "userData";
 const getFinanceRule = (meta, valor) => {
   switch (meta) {
     case "economizar":
@@ -29,6 +30,18 @@ class UserStore {
 
   constructor() {
     makeAutoObservable(this);
+    this.#buscarDadosDoLocalstorage();
+
+    autorun(() => {
+      const userState = {
+        nome: this.nome,
+        renda: this.renda,
+        objetivoFinanceiro: this.objetivoFinanceiro,
+        orcamentoDiario: this.orcamentoDiario,
+      };
+
+      localStorage.setItem(KEY_STORAGE, JSON.stringify(userState));
+    });
   }
 
   defineDadosUsuario({ nome, renda, objetivoFinanceiro }) {
@@ -55,6 +68,24 @@ class UserStore {
 
   get objetivoFinanceiroAtual() {
     return OBJETIVO_FINANCEIRO[this.objetivoFinanceiro] || "";
+  }
+
+  #buscarDadosDoLocalstorage() {
+    const dados = localStorage.getItem(KEY_STORAGE);
+
+    if (dados) {
+      try {
+        const { nome, renda, objetivoFinanceiro, orcamentoDiario } =
+          JSON.parse(dados);
+
+        this.nome = nome;
+        this.renda = renda;
+        this.objetivoFinanceiro = objetivoFinanceiro;
+        this.orcamentoDiario = orcamentoDiario;
+      } catch (error) {
+        console.error("Erro ao buscar dados no localstorage");
+      }
+    }
   }
 }
 
