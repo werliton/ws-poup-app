@@ -30,6 +30,10 @@ class AccountStore {
     }));
   }
 
+  get saldoTotal() {
+    return this.contas.reduce((total, conta) => total + conta.saldo, 0);
+  }
+
   #buscarDadosDoLocalstorage() {
     try {
       const dados = localStorage.getItem(KEY_STORAGE);

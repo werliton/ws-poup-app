@@ -31,6 +31,31 @@ class TransactionStore {
     }));
   }
 
+  get allTransactionByCategory() {
+    const _despesas = this.transactions.filter(
+      (item) => item.tipo == "despesa"
+    );
+
+    const categoriasAgrupadas = _despesas.reduce(
+      (valorAcumulado, transacao) => {
+        const categoria = transacao.categoria;
+        valorAcumulado[categoria] =
+          parseFloat(transacao.valor) + (valorAcumulado[categoria] || 0);
+
+        return valorAcumulado;
+      },
+      {}
+    );
+
+    const categorias = Object.keys(categoriasAgrupadas);
+    const despesas = Object.values(categoriasAgrupadas);
+
+    return {
+      categorias,
+      despesas,
+    };
+  }
+
   #buscarDadosDoLocalstorage() {
     try {
       const dados = localStorage.getItem(KEY_STORAGE);

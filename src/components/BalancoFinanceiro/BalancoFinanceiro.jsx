@@ -12,8 +12,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useRecoilValue } from "recoil";
-import { selectTransactionsToGraph } from "src/service/selectors/graphSelector";
+import { useStore } from "src/mobx/StoreContext";
+import { observer } from "mobx-react";
 
 ChartJS.register(
   CategoryScale,
@@ -39,8 +39,10 @@ const options = {
   },
 };
 
-const BalancoFinanceiro = () => {
-  const { categorias, despesas } = useRecoilValue(selectTransactionsToGraph);
+const BalancoFinanceiro = observer(() => {
+  const { transactionsStore } = useStore();
+  const categorias = transactionsStore.allTransactionByCategory.categorias;
+  const despesas = transactionsStore.allTransactionByCategory.despesas;
 
   return (
     <Cartao>
@@ -78,5 +80,5 @@ const BalancoFinanceiro = () => {
       </CartaoCorpo>
     </Cartao>
   );
-};
+});
 export default BalancoFinanceiro;
