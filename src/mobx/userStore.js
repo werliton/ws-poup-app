@@ -55,6 +55,16 @@ class UserStore {
     return currencyFormatter.format(this.orcamentoDiario);
   }
 
+  atualizaOrcamentoDiario(transaction) {
+    const valorAbs = Math.abs(transaction.valor);
+
+    if (transaction.tipo != "receita") {
+      this.orcamentoDiario -= parseFloat(valorAbs);
+    } else {
+      this.orcamentoDiario += parseFloat(valorAbs);
+    }
+  }
+
   get progressoCalculado() {
     const { objetivoFinanceiro, orcamentoDiario, renda } = this;
 
@@ -71,20 +81,20 @@ class UserStore {
   }
 
   #buscarDadosDoLocalstorage() {
-    const dados = localStorage.getItem(KEY_STORAGE);
+    try {
+      const dados = localStorage.getItem(KEY_STORAGE);
 
-    if (dados) {
-      try {
-        const { nome, renda, objetivoFinanceiro, orcamentoDiario } =
-          JSON.parse(dados);
+      if (!dados) return;
 
-        this.nome = nome;
-        this.renda = renda;
-        this.objetivoFinanceiro = objetivoFinanceiro;
-        this.orcamentoDiario = orcamentoDiario;
-      } catch (error) {
-        console.error("Erro ao buscar dados no localstorage");
-      }
+      const { nome, renda, objetivoFinanceiro, orcamentoDiario } =
+        JSON.parse(dados);
+
+      this.nome = nome;
+      this.renda = renda;
+      this.objetivoFinanceiro = objetivoFinanceiro;
+      this.orcamentoDiario = orcamentoDiario;
+    } catch (error) {
+      console.error("Erro ao buscar dados no localstorage");
     }
   }
 }

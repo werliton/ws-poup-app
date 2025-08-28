@@ -1,4 +1,4 @@
-import React, { useId, useState } from "react";
+import React, { useState } from "react";
 import CampoTexto from "@components/CampoTexto";
 import Fieldset from "@components/Fieldset";
 import Form from "@components/Form";
@@ -6,11 +6,11 @@ import { MoneyIcon } from "@components/Icones";
 import Label from "@components/Label";
 import Modal from "@components/Modal";
 import { SelectGroup, SelectOption } from "@components/Select";
-import { useRecoilState } from "recoil";
-import { transactionsAtom } from "src/service/atoms/transactionsAtom";
-import useBudget from "src/hooks/useBudget";
 
-const TransacaoModal = ({ isOpen, onCloseModal }) => {
+import { observer } from "mobx-react";
+import { useStore } from "src/mobx/StoreContext";
+
+const TransacaoModal = observer(({ isOpen, onCloseModal }) => {
   const [novaTransacao, setNovaTransacao] = useState({
     nome: "",
     valor: 0,
@@ -18,25 +18,11 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
     categoria: "",
     data: "",
   });
-  const [, setTransaction] = useRecoilState(transactionsAtom);
-  const { addIncome, addOutcome } = useBudget();
-  const id = useId();
-
-  const transaction = {
-    receita: addIncome,
-    despesa: addOutcome,
-  };
+  const { transactionsStore, userStore } = useStore();
 
   const aoSubmeterFormModal = () => {
-    setTransaction((prev) => [
-      ...prev,
-      {
-        ...novaTransacao,
-        id,
-      },
-    ]);
-
-    transaction[novaTransacao.tipo](novaTransacao.valor);
+    transactionsStore.saveTransaction(novaTransacao);
+    userStore.atualizaOrcamentoDiario(novaTransacao);
 
     onCloseModal();
   };
@@ -127,6 +113,6 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
       </Form>
     </Modal>
   );
-};
+});
 
 export default TransacaoModal;

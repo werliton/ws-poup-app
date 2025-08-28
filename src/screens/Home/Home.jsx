@@ -20,9 +20,9 @@ function Home() {
       </Orcamento>
       <Movimentacoes>
         <Transacoes />
-        <Contas />
+        {/* <Contas /> */}
       </Movimentacoes>
-      <BalancoFinanceiro />
+      {/* <BalancoFinanceiro /> */}
     </Container>
   );
 }

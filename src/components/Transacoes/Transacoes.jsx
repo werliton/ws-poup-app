@@ -5,11 +5,10 @@ import Transacao from "./Transacao/Transacao";
 import { Cartao, CartaoCabecalho } from "@components/Cartao";
 import Botao from "@components/Botao";
 import TransacaoModal from "./TransacaoModal";
-import { selectTransactions } from "src/service/selectors/transactionSelector";
-import { useRecoilValue } from "recoil";
+import { useStore } from "src/mobx/StoreContext";
 
 const Transacoes = () => {
-  const transacoes = useRecoilValue(selectTransactions);
+  const { transactionsStore } = useStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -19,6 +18,8 @@ const Transacoes = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  const transacoes = transactionsStore.allTransactions;
 
   return (
     <Cartao>
