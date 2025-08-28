@@ -16,7 +16,7 @@ const getFinanceRule = (meta, valor) => {
 };
 
 const OBJETIVO_FINANCEIRO = {
-  economuizar: "Economizar",
+  economizar: "Economizar",
   investir: "Investir",
   "controlar-gastos": "Controlar Gastos",
 };

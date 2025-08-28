@@ -1,4 +1,3 @@
-import Conta from "./Conta/Conta";
 import styled from "styled-components";
 import CampoTexto from "@components/CampoTexto";
 import { Cartao, CartaoCabecalho } from "@components/Cartao";
@@ -10,30 +9,13 @@ import Fieldset from "@components/Fieldset";
 import { WalletIcon } from "@components/Icones";
 import CartaoCorpo from "@components/Cartao/CartaoCorpo/CartaoCorpo";
 import useAccount from "src/hooks/useAccount";
+import { Lista } from "./Conta/Lista";
 
 export const Container = styled(CartaoCorpo)`
   padding: var(--padding-l) var(--padding-m);
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const ListaMovimentacoes = styled.ul`
-  list-style: none;
-  color: var(--cor-primaria);
-  margin: 0;
-  padding-left: 0px;
-  padding-bottom: var(--padding-m);
-  width: 100%;
-  height: 200px;
-  overflow: auto;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 `;
 
 const Contas = () => {
@@ -44,19 +26,13 @@ const Contas = () => {
     setNovaConta,
     isModalOpen,
     novaConta,
-    contas,
   } = useAccount();
 
   return (
     <Cartao>
       <CartaoCabecalho>Minhas contas</CartaoCabecalho>
       <Container>
-        <ListaMovimentacoes>
-          {contas.length == 0 && <div>Nenhuma conta cadastrada.</div>}
-          {contas.map((conta) => (
-            <Conta key={conta.id} conta={conta} />
-          ))}
-        </ListaMovimentacoes>
+        <Lista />
         <Botao $variante="neutro" onClick={() => handleOpenModal()}>
           <WalletIcon />
           Adicionar conta

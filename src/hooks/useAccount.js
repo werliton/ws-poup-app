@@ -1,8 +1,5 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import { accountsAtom } from "src/service/atoms/accountsAtom";
-import { getAccountState } from "src/service/selectors/accountSelector";
-import { useId, useState } from "react";
-import useBudget from "src/hooks/useBudget";
+import { useState } from "react";
+import { useStore } from "src/mobx/StoreContext";
 
 function useAccount() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,10 +7,7 @@ function useAccount() {
     banco: "",
     saldo: 0,
   });
-  const id = useId();
-  const [, setAccount] = useRecoilState(accountsAtom);
-  const savedAccounts = useRecoilValue(getAccountState);
-  const { addIncome } = useBudget();
+  const { accountStore, userStore } = useStore();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -25,15 +19,16 @@ function useAccount() {
 
   const aoAdicionarConta = () => {
     handleCloseModal();
-
-    setAccount((prev) => [...prev, { id, ...novaConta }]);
-    addIncome(novaConta.saldo);
+    accountStore.save(novaConta);
+    userStore.atualizaOrcamentoDiario({
+      tipo: "receita",
+      valor: novaConta.saldo,
+    });
   };
 
   return {
     isModalOpen,
     novaConta,
-    contas: savedAccounts,
     setNovaConta,
     aoAdicionarConta,
     handleOpenModal,

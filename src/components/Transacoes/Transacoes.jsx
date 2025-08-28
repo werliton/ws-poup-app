@@ -1,14 +1,12 @@
 import { useState } from "react";
 import MoneyIcon from "@components/Icones/MoneyIcon/MoneyIcon";
-import { Container, ListaMovimentacoes } from "@components/Contas/Contas";
-import Transacao from "./Transacao/Transacao";
+import { Container } from "@components/Contas/Contas";
 import { Cartao, CartaoCabecalho } from "@components/Cartao";
 import Botao from "@components/Botao";
 import TransacaoModal from "./TransacaoModal";
-import { useStore } from "src/mobx/StoreContext";
+import { Lista } from "./Transacao/Lista";
 
 const Transacoes = () => {
-  const { transactionsStore } = useStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -19,18 +17,11 @@ const Transacoes = () => {
     setIsModalOpen(false);
   };
 
-  const transacoes = transactionsStore.allTransactions;
-
   return (
     <Cartao>
       <CartaoCabecalho>Movimentação financeira</CartaoCabecalho>
       <Container>
-        <ListaMovimentacoes>
-          {transacoes.length == 0 && <div>Nenhuma transação por aqui.</div>}
-          {transacoes.map((transacao) => (
-            <Transacao key={transacao.id} transacao={transacao} />
-          ))}
-        </ListaMovimentacoes>
+        <Lista />
         <Botao $variante="neutro" onClick={() => handleOpenModal()}>
           <MoneyIcon />
           Adicionar transação

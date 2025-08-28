@@ -1,3 +1,4 @@
+import { observer } from "mobx-react";
 import React from "react";
 import { useStore } from "src/mobx/StoreContext";
 import styled from "styled-components";
@@ -32,7 +33,7 @@ export const TextoProgresso = styled.div`
   font-size: 1rem;
 `;
 
-const BarraProgresso = () => {
+const BarraProgresso = observer(() => {
   const { userStore } = useStore();
   const progressoMeta = userStore.progressoCalculado;
 
@@ -42,6 +43,6 @@ const BarraProgresso = () => {
       <TextoProgresso>{progressoMeta}%</TextoProgresso>
     </BarraContainer>
   );
-};
+});
 
 export default BarraProgresso;
